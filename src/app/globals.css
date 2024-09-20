@@ -67,3 +67,42 @@
     @apply tw-bg-background tw-text-foreground;
   }
 }
+
+.shiki {
+  counter-reset: step;
+  counter-increment: step 0;
+  .line {
+    @apply tw-border-l-4 tw-border-transparent;
+    &::before {
+      counter-increment: step;
+      @apply tw-mr-6 tw-inline-block tw-w-4 tw-border-transparent tw-text-right tw-text-neutral-400 tw-content-[counter(step)];
+    }
+    &.highlighted,
+    &.diff {
+      @apply tw--ml-4 tw--mr-5 tw-inline-block tw-w-[calc(100%+(theme(spacing.5)+theme(spacing.4)))] tw-pl-4 tw-pr-5;
+    }
+    &.highlighted {
+      @apply tw-border-neutral-500 tw-bg-neutral-800;
+    }
+    &.diff {
+      &.add,
+      &.remove {
+        span:first-child::before {
+          @apply tw--ml-4 tw-inline-flex tw-w-4;
+        }
+      }
+      &.add {
+        @apply tw-border-blue-500 tw-bg-blue-500/25 before:tw-text-blue-500;
+        span:first-child::before {
+          @apply tw-text-blue-500 tw-content-["+"];
+        }
+      }
+      &.remove {
+        @apply tw-border-orange-500 tw-bg-orange-500/30 tw-opacity-70 *:!tw-text-neutral-400 before:tw-text-orange-500;
+        span:first-child::before {
+          @apply tw-text-orange-500 tw-content-["-"];
+        }
+      }
+    }
+  }
+}

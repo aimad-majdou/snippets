@@ -31,7 +31,6 @@ export default function RootLayout({
       >
         <main className='tw-container tw-px-12'>{children}</main>
         {modal}
-        <div id='modal-root' />
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+import SyntaxHighlight from '@/components/tools/syntax-highlight';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getSnippet } from '@/data/snippet-dto';
@@ -41,9 +42,7 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
           </div>
         </CardHeader>
         <CardContent>
-          <pre className='tw-bg-gray-100 tw-p-4 tw-rounded-md tw-overflow-x-auto'>
-            <code className='tw-text-sm tw-font-mono'>{snippet.code}</code>
-          </pre>
+          <SyntaxHighlight code={snippet.code} title={snippet.title} />
         </CardContent>
       </Card>
     </div>
