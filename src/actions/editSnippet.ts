@@ -3,7 +3,7 @@
 import { db } from '@/db';
 import { snippetSchema, SnippetSchemaType } from '@/schemas/snippet';
 
-const createSnippetAction = async (data: SnippetSchemaType) => {
+const editSnippetAction = async (id: string, data: SnippetSchemaType) => {
   const result = snippetSchema.safeParse(data);
 
   if (!result.success) {
@@ -17,8 +17,16 @@ const createSnippetAction = async (data: SnippetSchemaType) => {
   }
 
   try {
-    // Create a new record in the database
-    await db.snippet.create({ data });
+    // Update snippet in the database
+    await db.snippet.update({
+      where: {
+        id,
+      },
+      data: {
+        title: data.title,
+        code: data.code,
+      },
+    });
   } catch (error) {
     return {
       error: 'An error occurred while creating the snippet.',
@@ -26,4 +34,4 @@ const createSnippetAction = async (data: SnippetSchemaType) => {
   }
 };
 
-export default createSnippetAction;
+export default editSnippetAction;

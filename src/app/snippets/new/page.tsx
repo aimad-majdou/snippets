@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import createSnippet from '@/actions/createSnippet';
+import createSnippetAction from '@/actions/createSnippet';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -23,7 +23,7 @@ const SnippetCreatePage = () => {
   const [, startTransition] = useTransition();
   const { toast } = useToast();
 
-  // 1. Define your form.
+  // 1. Define form
   const form = useForm<SnippetSchemaType>({
     resolver: zodResolver(snippetSchema),
     defaultValues: {
@@ -39,10 +39,10 @@ const SnippetCreatePage = () => {
     formState: { isSubmitting, isValid },
   } = form;
 
-  // 2. Define a submit handler.
+  // 2. Define a submit handler
   const onSubmit = handleSubmit(async (data) => {
     startTransition(async () => {
-      const response = await createSnippet(data);
+      const response = await createSnippetAction(data);
       console.log(response);
       if (response?.error) {
         toast({
