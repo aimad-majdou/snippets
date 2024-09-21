@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['shiki'],
+  transpilePackages: ["shiki"],
 };
 
 export default nextConfig;

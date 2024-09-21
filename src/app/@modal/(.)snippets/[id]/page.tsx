@@ -1,6 +1,6 @@
-import SyntaxHighlight from '@/components/tools/syntax-highlight';
-import { getSnippet } from '@/data/snippet-dto';
-import { Modal } from './modal';
+import SyntaxHighlight from "@/components/tools/syntax-highlight";
+import { getSnippet } from "@/data/snippet-dto";
+import { Modal } from "./modal";
 
 type SnippetShowModelProps = {
   params: {
@@ -12,7 +12,7 @@ const SnippetShowModel = async ({ params }: SnippetShowModelProps) => {
   const snippet = await getSnippet(params.id);
   return (
     <Modal>
-      <SyntaxHighlight code={snippet?.code || ''} title={snippet?.title} />
+      <SyntaxHighlight code={snippet?.code || ""} title={snippet?.title} />
     </Modal>
   );
 };

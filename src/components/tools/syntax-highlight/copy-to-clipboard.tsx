@@ -1,6 +1,6 @@
-'use client';
-import { CopyIcon } from 'lucide-react';
-import { useState } from 'react';
+"use client";
+import { CopyIcon } from "lucide-react";
+import { useState } from "react";
 
 export default function CopyToClipboard({ code }: { code: string }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -9,9 +9,9 @@ export default function CopyToClipboard({ code }: { code: string }) {
     try {
       await navigator.clipboard.writeText(code);
       setIsCopied(true);
-      console.log('Copied to clipboard');
+      console.log("Copied to clipboard");
     } catch (error) {
-      console.error('Error copying to clipboard', error);
+      console.error("Error copying to clipboard", error);
     } finally {
       setTimeout(() => {
         setIsCopied(false);
@@ -21,7 +21,7 @@ export default function CopyToClipboard({ code }: { code: string }) {
 
   return (
     <button disabled={isCopied} onClick={copyToClipboard}>
-      {isCopied ? 'Copied' : 'Copy'}
+      {isCopied ? "Copied" : "Copy"}
       <CopyIcon />
     </button>
   );

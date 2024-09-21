@@ -1,6 +1,9 @@
-import { db } from '@/db';
-import { SnippetCreateSchemaType, SnippetUpdateSchemaType } from '@/schemas/snippet';
-import 'server-only';
+import { db } from "@/db";
+import {
+  SnippetCreateSchemaType,
+  SnippetUpdateSchemaType,
+} from "@/schemas/snippet";
+import "server-only";
 
 export async function getSnippet(id: string) {
   // Fetch snippet from the database
@@ -16,7 +19,11 @@ export async function createSnippet(data: SnippetCreateSchemaType) {
   });
 }
 
-export async function updateSnippet({id, title, code}: SnippetUpdateSchemaType) {
+export async function updateSnippet({
+  id,
+  title,
+  code,
+}: SnippetUpdateSchemaType) {
   // Update snippet in the database
   return db.snippet.update({
     where: { id },

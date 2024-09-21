@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-import createSnippetAction from '@/actions/createSnippet';
-import { Button } from '@/components/ui/button';
+import createSnippetAction from "@/actions/createSnippet";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,12 +12,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
-import { SnippetCreateSchema, SnippetCreateSchemaType } from '@/schemas/snippet';
-import { redirect } from 'next/navigation';
-import { useTransition } from 'react';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  SnippetCreateSchema,
+  SnippetCreateSchemaType,
+} from "@/schemas/snippet";
+import { redirect } from "next/navigation";
+import { useTransition } from "react";
 
 const SnippetCreatePage = () => {
   const [, startTransition] = useTransition();
@@ -27,10 +30,10 @@ const SnippetCreatePage = () => {
   const form = useForm<SnippetCreateSchemaType>({
     resolver: zodResolver(SnippetCreateSchema),
     defaultValues: {
-      title: '',
-      code: '',
+      title: "",
+      code: "",
     },
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const {
@@ -46,28 +49,28 @@ const SnippetCreatePage = () => {
       console.log(response);
       if (response?.error) {
         toast({
-          title: 'An error occurred',
+          title: "An error occurred",
           description: response.error,
-          variant: 'destructive',
-          className: 'tw-bg-red-500 tw-text-white',
+          variant: "destructive",
+          className: "tw-bg-red-500 tw-text-white",
         });
       } else {
         // Redirect the user to home page
-        redirect('/');
+        redirect("/");
       }
     });
   });
 
   return (
     <>
-      <h1 className='tw-scroll-m-20 tw-text-4xl tw-font-extrabold tw-tracking-tight lg:tw-text-5xl tw-mb-10'>
+      <h1 className="tw-scroll-m-20 tw-text-4xl tw-font-extrabold tw-tracking-tight lg:tw-text-5xl tw-mb-10">
         Create a snippet
       </h1>
       <Form {...form}>
-        <form onSubmit={onSubmit} className='space-y-8'>
+        <form onSubmit={onSubmit} className="space-y-8">
           <FormField
             control={control}
-            name='title'
+            name="title"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Title</FormLabel>
@@ -80,7 +83,7 @@ const SnippetCreatePage = () => {
           />
           <FormField
             control={control}
-            name='code'
+            name="code"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Code</FormLabel>
@@ -91,8 +94,8 @@ const SnippetCreatePage = () => {
               </FormItem>
             )}
           />
-          <Button type='submit' disabled={isSubmitting || !isValid}>
-            {isSubmitting ? 'Adding...' : 'Add'}
+          <Button type="submit" disabled={isSubmitting || !isValid}>
+            {isSubmitting ? "Adding..." : "Add"}
           </Button>
         </form>
       </Form>

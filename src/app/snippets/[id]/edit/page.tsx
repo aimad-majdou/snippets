@@ -1,6 +1,6 @@
-import { getSnippet } from '@/data/snippet-dto';
-import { notFound } from 'next/navigation';
-import SnippetEditForm from './_components/form';
+import { getSnippet } from "@/data/snippet-dto";
+import { notFound } from "next/navigation";
+import SnippetEditForm from "./_components/form";
 
 interface SnippetEditProps {
   params: {

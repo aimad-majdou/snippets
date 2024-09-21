@@ -1,4 +1,4 @@
-import Editor, { EditorProps } from '@monaco-editor/react';
+import Editor, { EditorProps } from "@monaco-editor/react";
 
 interface CodeEditorProps extends EditorProps {
   readonly?: boolean;
@@ -6,9 +6,9 @@ interface CodeEditorProps extends EditorProps {
 }
 
 export function CodeEditor({
-  theme = 'vs-dark',
-  height = '40vh',
-  language = 'typescript',
+  theme = "vs-dark",
+  height = "40vh",
+  language = "typescript",
   options: optionsProp,
   ...rest
 }: CodeEditorProps) {

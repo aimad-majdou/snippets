@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { CodeEditor } from '@/components/code-editor';
-import { Snippet } from '@prisma/client';
-import { useState } from 'react';
+import { CodeEditor } from "@/components/code-editor";
+import { Snippet } from "@prisma/client";
+import { useState } from "react";
 
 interface SnippetEditForm {
   snippet: Snippet;
@@ -10,7 +10,7 @@ interface SnippetEditForm {
 
 export default function SnippetEditForm({ snippet }: SnippetEditForm) {
   const [code, setCode] = useState(snippet.code);
-  const handleEditorChange = (value: string = '') => {
+  const handleEditorChange = (value: string = "") => {
     setCode(value);
   };
 

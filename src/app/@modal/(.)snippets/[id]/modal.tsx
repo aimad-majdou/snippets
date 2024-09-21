@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { useRouter } from 'next/navigation';
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -12,7 +12,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return (
     <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
-      <DialogContent className='sm:tw-max-w-[425px]'>
+      <DialogContent className="sm:tw-max-w-[425px]">
         <div>{children}</div>
       </DialogContent>
     </Dialog>
