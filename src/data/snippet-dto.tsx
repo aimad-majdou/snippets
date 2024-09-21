@@ -38,3 +38,10 @@ export async function updateSnippet({
     },
   });
 }
+
+export async function deleteSnippet(id: string) {
+  // Delete snippet from the database
+  return db.snippet.delete({
+    where: { id },
+  });
+}

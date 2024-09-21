@@ -1,3 +1,4 @@
+import deleteSnippetAction from "@/actions/deleteSnippet";
 import SyntaxHighlight from "@/components/tools/syntax-highlight";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,6 +20,9 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
     return notFound();
   }
 
+  // using bind to pass the snippet id to the deleteSnippetAction instead of using a startTransition with a callback to call the deleteSnippetAction with the snippet id
+  const handleDeleteSnippet = deleteSnippetAction.bind(null, snippet.id);
+
   return (
     <div className="tw-container tw-mx-auto tw-py-8">
       <Card className="tw-w-full tw-max-w-4xl tw-mx-auto">
@@ -34,10 +38,12 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
                   Edit
                 </Button>
               </Link>
-              <Button variant="destructive" size="sm">
-                <Trash2 className="tw-w-4 tw-h-4" />
-                {/* {isDeleting ? 'Deleting...' : 'Delete'} */}
-              </Button>
+              <form action={handleDeleteSnippet}>
+                <Button variant="destructive" size="sm">
+                  <Trash2 className="tw-w-4 tw-h-4" />
+                  Delete
+                </Button>
+              </form>
             </div>
           </div>
         </CardHeader>

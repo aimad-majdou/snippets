@@ -34,6 +34,10 @@ interface SnippetEditFormProps {
   snippet: Snippet;
 }
 
+/**
+ * This edit form is using the `react-hook-form` library to manage the form state and validation.
+ * Check the add form (/new) for a different implementation using useFormState (to validate the form without the user having JS enabled).
+ */
 export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
   const { toast } = useToast();
   const [, startTransition] = useTransition();
