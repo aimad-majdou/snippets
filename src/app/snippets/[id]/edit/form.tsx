@@ -74,7 +74,7 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
           title: "Snippet updated",
           description: "Your code snippet has been successfully updated.",
         });
-        redirect("/"); // Redirect on success
+        redirect(`/snippets/${data.id}`); // Redirect on success
       }
     });
   });
