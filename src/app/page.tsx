@@ -10,7 +10,7 @@ const Home = async () => {
     <div className="tw-container tw-mx-auto tw-py-8">
       <div className="tw-flex tw-items-center tw-justify-between tw-mb-6">
         <h1 className="tw-text-3xl tw-font-bold">Snippets</h1>
-        <Link href="/snippets/new" passHref>
+        <Link href="/new" passHref>
           <Button>
             <PlusIcon className="tw-w-4 tw-h-4 tw-mr-2" />
             New Snippet
