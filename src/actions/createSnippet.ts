@@ -27,7 +27,7 @@ const createSnippetAction = async (
   try {
     // Attempt to create the snippet in the database
     await createSnippet({
-      title: "",
+      title: data.get("title") as string,
       code: data.get("code") as string,
     });
   } catch (error) {

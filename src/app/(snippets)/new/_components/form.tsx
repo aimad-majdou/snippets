@@ -1,9 +1,11 @@
 "use client";
 import createSnippetAction from "@/actions/createSnippet";
+import { CodeEditor } from "@/components/code-editor/code-editor";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useRef, useState } from "react";
 import { useFormState } from "react-dom";
 
 /**
@@ -27,14 +29,34 @@ export default function SnippetAddForm() {
     message: {},
   });
 
+  const [code, setCode] = useState(""); // State to manage code value
+
+  const editorRef = useRef<any>(null);
+
   // Extract field-specific errors (if any) from the form state
   const fieldErrors = formState.message as Record<string, string>;
+
+  const handleCodeEditorChange = (value: string = "") => {
+    setCode(value);
+  };
+
+  const handleCodeEditorLabelClick = () => {
+    if (editorRef.current) {
+      editorRef.current.focus(); // Focus the Monaco editor when label is clicked
+    }
+  };
+
+  const handleSubmit = (formData: FormData) => {
+    // Append the code to the form data
+    formData.append("code", code);
+    return action(formData); // Call the action with the updated form data
+  };
 
   return (
     <>
       {/* The form is submitted via server-side action, validated on the server */}
       {/* We don't add noValidate so we let the browser run some kind of client side validation */}
-      <form action={action} className="space-y-8">
+      <form action={handleSubmit} className="space-y-8">
         <CardContent className="tw-space-y-4">
           {/* Title Input Field */}
           <div className="tw-space-y-2">
@@ -47,8 +69,17 @@ export default function SnippetAddForm() {
           </div>
           {/* Code Input Field */}
           <div className="tw-space-y-2">
-            <label className="tw-block tw-text-sm tw-font-medium">Code</label>
-            <Input name="code" required />
+            <label
+              className="tw-block tw-text-sm tw-font-medium"
+              onClick={handleCodeEditorLabelClick}
+            >
+              Code
+            </label>
+            <CodeEditor
+              ref={editorRef} // Forward the ref to Monaco editor
+              onChange={handleCodeEditorChange}
+              ariaLabel="Code"
+            />
             {/* Display error message for the code field */}
             {fieldErrors.code && (
               <p className="tw-text-red-500 tw-text-sm">{fieldErrors.code}</p>
