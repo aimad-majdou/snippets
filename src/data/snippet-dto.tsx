@@ -1,12 +1,28 @@
 import { db } from '@/db';
+import { SnippetCreateSchemaType, SnippetUpdateSchemaType } from '@/schemas/snippet';
 import 'server-only';
 
 export async function getSnippet(id: string) {
-  // TODO: remove this after
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   // Fetch snippet from the database
   return db.snippet.findFirst({
     where: { id },
+  });
+}
+
+export async function createSnippet(data: SnippetCreateSchemaType) {
+  // Create snippet in the database
+  return db.snippet.create({
+    data,
+  });
+}
+
+export async function updateSnippet({id, title, code}: SnippetUpdateSchemaType) {
+  // Update snippet in the database
+  return db.snippet.update({
+    where: { id },
+    data: {
+      title,
+      code,
+    },
   });
 }

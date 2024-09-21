@@ -1,27 +1,15 @@
 'use server';
 
-import { db } from '@/db';
-import { snippetSchema, SnippetSchemaType } from '@/schemas/snippet';
+import { createSnippet } from '@/data/snippet-dto';
+import { SnippetCreateSchemaType } from '@/schemas/snippet';
+import { buildErrorMessage } from './helpers';
 
-const createSnippetAction = async (data: SnippetSchemaType) => {
-  const result = snippetSchema.safeParse(data);
-
-  if (!result.success) {
-    const errorMessages = result.error.issues.reduce((acc, issue) => {
-      return acc + issue.message + '\n';
-    }, '');
-
-    return {
-      error: errorMessages,
-    };
-  }
-
+const createSnippetAction = async (snippet: SnippetCreateSchemaType) => {
   try {
-    // Create a new record in the database
-    await db.snippet.create({ data });
+    await createSnippet(snippet)
   } catch (error) {
     return {
-      error: 'An error occurred while creating the snippet.',
+      error: buildErrorMessage(error),
     };
   }
 };

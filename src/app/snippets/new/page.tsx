@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { snippetSchema, SnippetSchemaType } from '@/schemas/snippet';
+import { SnippetCreateSchema, SnippetCreateSchemaType } from '@/schemas/snippet';
 import { redirect } from 'next/navigation';
 import { useTransition } from 'react';
 
@@ -24,8 +24,8 @@ const SnippetCreatePage = () => {
   const { toast } = useToast();
 
   // 1. Define form
-  const form = useForm<SnippetSchemaType>({
-    resolver: zodResolver(snippetSchema),
+  const form = useForm<SnippetCreateSchemaType>({
+    resolver: zodResolver(SnippetCreateSchema),
     defaultValues: {
       title: '',
       code: '',

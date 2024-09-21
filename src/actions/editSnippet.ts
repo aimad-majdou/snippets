@@ -1,37 +1,18 @@
 'use server';
 
-import { db } from '@/db';
-import { snippetSchema, SnippetSchemaType } from '@/schemas/snippet';
+import { updateSnippet } from '@/data/snippet-dto';
+import { SnippetUpdateSchemaType } from '@/schemas/snippet';
 
-const editSnippetAction = async (id: string, data: SnippetSchemaType) => {
-  const result = snippetSchema.safeParse(data);
-
-  if (!result.success) {
-    const errorMessages = result.error.issues.reduce((acc, issue) => {
-      return acc + issue.message + '\n';
-    }, '');
-
-    return {
-      error: errorMessages,
-    };
-  }
-
+const editSnippetAction = async (data: SnippetUpdateSchemaType) => {
   try {
-    // Update snippet in the database
-    await db.snippet.update({
-      where: {
-        id,
-      },
-      data: {
-        title: data.title,
-        code: data.code,
-      },
-    });
+    await updateSnippet(data);
   } catch (error) {
+    console.log(error)
     return {
-      error: 'An error occurred while creating the snippet.',
+      error: 'An error occurred while updating the snippet.',
     };
   }
 };
 
 export default editSnippetAction;
+
