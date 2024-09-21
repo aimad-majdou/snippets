@@ -2,6 +2,7 @@
 
 import { updateSnippet } from "@/data/snippet-dto";
 import { SnippetUpdateSchemaType } from "@/schemas/snippet";
+import { redirect } from "next/navigation";
 import { buildErrorMessage } from "./helpers";
 
 /**
@@ -32,6 +33,8 @@ const editSnippetAction = async (data: SnippetUpdateSchemaType) => {
       ),
     };
   }
+
+  redirect(`/${data.id}`); // Redirect on success
 };
 
 export default editSnippetAction;

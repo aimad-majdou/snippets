@@ -21,7 +21,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Snippet } from "@prisma/client";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
@@ -84,7 +83,6 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
           title: "Snippet updated",
           description: "Your code snippet has been successfully updated.",
         });
-        redirect(`/snippets/${data.id}`); // Redirect on success
       }
     });
   });
