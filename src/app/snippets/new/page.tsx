@@ -43,7 +43,7 @@ const SnippetCreatePage = () => {
   } = form;
 
   // 2. Define a submit handler
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit((data) => {
     startTransition(async () => {
       const response = await createSnippetAction(data);
       console.log(response);

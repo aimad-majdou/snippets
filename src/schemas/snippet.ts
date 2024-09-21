@@ -5,7 +5,9 @@ export const SnippetCreateSchema = z.object({
   title: z.string().min(5, {
     message: "Title must be at least 5 characters.",
   }),
-  code: z.string(),
+  code: z.string().min(1, {
+    message: "Code must not be empty.",
+  }),
 }) satisfies z.Schema<Prisma.SnippetUncheckedCreateInput>;
 
 export const SnippetUpdateSchema = z.object({
@@ -13,7 +15,9 @@ export const SnippetUpdateSchema = z.object({
   title: z.string().min(5, {
     message: "Title must be at least 5 characters.",
   }),
-  code: z.string(),
+  code: z.string().min(1, {
+    message: "Code must not be empty.",
+  }),
 }) satisfies z.Schema<Prisma.SnippetUncheckedUpdateInput>;
 
 export type SnippetCreateSchemaType = z.infer<typeof SnippetCreateSchema>;

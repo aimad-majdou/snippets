@@ -4,9 +4,9 @@ import { createSnippet } from "@/data/snippet-dto";
 import { SnippetCreateSchemaType } from "@/schemas/snippet";
 import { buildErrorMessage } from "./helpers";
 
-const createSnippetAction = async (snippet: SnippetCreateSchemaType) => {
+const createSnippetAction = async (data: SnippetCreateSchemaType) => {
   try {
-    await createSnippet(snippet);
+    await createSnippet(data)
   } catch (error) {
     return {
       error: buildErrorMessage(error),
