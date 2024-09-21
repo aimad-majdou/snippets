@@ -1,6 +1,7 @@
 "use server";
 
 import { createSnippet } from "@/data/snippet-dto";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
 
@@ -48,6 +49,8 @@ const createSnippetAction = async (
       },
     };
   }
+
+  revalidatePath("/"); // Revalidate the home page to reflect the new snippet
 
   // never put a redirect inside a try/catch block
   // because under the hood it throws an error with NEXT_REDIRECT and it will be caught by the catch block instead of redirecting
