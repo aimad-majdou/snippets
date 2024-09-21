@@ -3,7 +3,7 @@ import SyntaxHighlight from "@/components/tools/syntax-highlight";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getSnippet } from "@/data/snippet-dto";
-import { Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -25,22 +25,30 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
 
   return (
     <div className="tw-container tw-mx-auto tw-py-8">
+      <div className="tw-mb-4">
+        <Link href="/" passHref>
+          <Button variant="ghost">
+            <ArrowLeft className="tw-w-4 tw-h-4 tw-mr-2" />
+            Go Back
+          </Button>
+        </Link>
+      </div>
       <Card className="tw-w-full tw-max-w-4xl tw-mx-auto">
         <CardHeader>
           <div className="tw-flex tw-items-center tw-justify-between">
             <CardTitle className="tw-text-2xl tw-font-bold">
               {snippet.title}
             </CardTitle>
-            <div className="tw-space-x-2">
-              <Link href={`/snippets/${snippet.id}/edit`} passHref>
-                <Button variant="outline" size="sm">
+            <div className="tw-flex tw-gap-2">
+              <Link href={`/${snippet.id}/edit`} passHref>
+                <Button variant="success" size="sm">
                   <Pencil className="tw-w-4 tw-h-4 tw-mr-2" />
                   Edit
                 </Button>
               </Link>
               <form action={handleDeleteSnippet}>
                 <Button variant="destructive" size="sm">
-                  <Trash2 className="tw-w-4 tw-h-4" />
+                  <Trash2 className="tw-w-4 tw-h-4 tw-mr-2" />
                   Delete
                 </Button>
               </form>
