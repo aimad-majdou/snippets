@@ -3,14 +3,21 @@ import React from "react";
 
 interface CodeEditorProps extends EditorProps {
   readonly?: boolean;
-  title: string;
+  title?: string;
   id?: string;
   ariaLabel?: string;
 }
 
 export const CodeEditor = React.forwardRef<any, CodeEditorProps>(
   (
-    { theme = "vs-dark", height = "40vh", language = "typescript", options: optionsProp, ariaLabel = "Code editor", ...rest },
+    {
+      theme = "vs-dark",
+      height = "40vh",
+      language = "typescript",
+      options: optionsProp,
+      ariaLabel = "Code editor",
+      ...rest
+    },
     ref
   ) => {
     const options: EditorProps["options"] = {
@@ -22,9 +29,9 @@ export const CodeEditor = React.forwardRef<any, CodeEditorProps>(
     };
 
     const handleEditorDidMount: OnMount = (editor) => {
-      if (ref && typeof ref === 'function') {
+      if (ref && typeof ref === "function") {
         ref(editor); // Call ref callback if it's a function
-      } else if (ref && 'current' in ref) {
+      } else if (ref && "current" in ref) {
         ref.current = editor; // Set ref current if it's an object ref
       }
     };

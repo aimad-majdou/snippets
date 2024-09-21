@@ -1,7 +1,7 @@
 "use client";
 
 import editSnippetAction from "@/actions/editSnippet";
-import { CodeEditor } from "@/components/code-editor"; // Assuming CodeEditor is correctly implemented
+import { CodeEditor } from "@/components/code-editor/code-editor";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import {

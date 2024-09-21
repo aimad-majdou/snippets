@@ -1,5 +1,5 @@
 import deleteSnippetAction from "@/actions/deleteSnippet";
-import SyntaxHighlight from "@/components/tools/syntax-highlight";
+import { CodeViewer } from "@/components/code-editor/code-viewer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getSnippet } from "@/data/snippet-dto";
@@ -56,7 +56,7 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
           </div>
         </CardHeader>
         <CardContent>
-          <SyntaxHighlight code={snippet.code} title={snippet.title} />
+          <CodeViewer title={snippet.title} code={snippet.code} />
         </CardContent>
       </Card>
     </div>
