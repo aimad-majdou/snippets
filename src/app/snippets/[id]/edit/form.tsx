@@ -35,14 +35,25 @@ interface SnippetEditFormProps {
 }
 
 /**
- * This edit form is using the `react-hook-form` library to manage the form state and validation.
- * Check the add form (/new) for a different implementation using useFormState (to validate the form without the user having JS enabled).
+ * SnippetEditForm
+ *
+ * This form allows users to edit an existing snippet using `react-hook-form`.
+ * - Client-side validation is implemented via `react-hook-form` and Zod schema validation.
+ * - The form is validated in real-time (on the client) using the `onChange` mode.
+ * - On submission, the form data is sent to a server action (`editSnippetAction`).
+ * - After submission, the data is validated again on the server (via Prisma's schema extension, see db/index.ts).
+ * - If validation passes, the snippet is updated in the database; otherwise, an error is shown.
+ * - The form shows server-side errors through a toast if any occur during snippet updating.
+ *
+ * This form provides immediate feedback to users by validating inputs as they type.
+ * For a comparison, check the `SnippetCreateForm` which only uses server-side validation.
  */
 export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
   const { toast } = useToast();
   const [, startTransition] = useTransition();
   const editorRef = useRef<any>(null); // Use Monaco editor ref
 
+  // Initialize react-hook-form with Zod validation and default values
   const form = useForm<SnippetUpdateSchemaType>({
     resolver: zodResolver(SnippetUpdateSchema),
     defaultValues: {
@@ -67,6 +78,7 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
       const response = await editSnippetAction(data); // Perform the update
 
       if (response?.error) {
+        // Show error toast if snippet update fails
         toast({
           title: "An error occurred",
           description: response.error,
@@ -74,6 +86,7 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
           className: "tw-bg-red-500 tw-text-white",
         });
       } else {
+        // Show success toast and redirect to the snippet page on success
         toast({
           title: "Snippet updated",
           description: "Your code snippet has been successfully updated.",
