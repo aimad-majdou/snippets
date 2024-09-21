@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { db } from "@/db";
+import { getSnippetList } from "@/data/snippet-dto";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
 const Home = async () => {
-  const snippets = await db.snippet.findMany();
+  const snippets = await getSnippetList();
   return (
     <div className="tw-container tw-mx-auto tw-py-8">
       <div className="tw-flex tw-items-center tw-justify-between tw-mb-6">

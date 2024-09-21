@@ -12,6 +12,11 @@ export async function getSnippet(id: string) {
   });
 }
 
+export async function getSnippetList() {
+  // Fetch all snippets from the database
+  return db.snippet.findMany();
+}
+
 export async function createSnippet(data: SnippetCreateSchemaType) {
   // Create snippet in the database
   return db.snippet.create({
