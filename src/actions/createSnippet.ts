@@ -14,6 +14,7 @@ import { ZodError } from "zod";
  * - **Server-Side Validation Only**: The form data is validated server-side using Prisma's schema extension (which leverages Zod for validation).
  * - **Error Handling**: If validation fails or the snippet creation encounters an issue, field-specific errors are returned and displayed under the relevant form fields.
  * - **No Client-Side Validation**: The form data is validated only on the server, with no client-side validation involved.
+ * - **Revalidation**: After a new snippet is successfully created, the homepage (or another relevant path) is revalidated to ensure that the new snippet is reflected in any list views or pages displaying snippets.
  *
  * On successful snippet creation, the user is redirected to the snippet list page.
  *
