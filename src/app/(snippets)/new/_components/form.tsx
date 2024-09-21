@@ -3,6 +3,7 @@ import createSnippetAction from "@/actions/createSnippet";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import { useFormState } from "react-dom";
 
 /**
@@ -59,10 +60,17 @@ export default function SnippetAddForm() {
           {fieldErrors.general && (
             <p className="tw-text-red-500 tw-text-sm">{fieldErrors.general}</p>
           )}
-          {/* Submit Button */}
-          <Button type="submit" className="tw-ml-auto">
-            Add
-          </Button>
+          {/* Submit/cancel Button */}
+          <div className="tw-flex tw-justify-between tw-w-full">
+            <Link href={`/`} passHref>
+              <Button type="button" variant="outline">
+                Cancel
+              </Button>
+            </Link>
+            <Button type="submit" className="tw-ml-auto">
+              Add
+            </Button>
+          </div>
         </CardFooter>
       </form>
     </>

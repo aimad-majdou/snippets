@@ -20,6 +20,7 @@ import {
 } from "@/schemas/snippet";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Snippet } from "@prisma/client";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -148,9 +149,11 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
           />
         </CardContent>
         <CardFooter className="tw-flex tw-justify-between">
-          <Button type="button" variant="outline">
-            Cancel
-          </Button>
+          <Link href={`/${snippet.id}`} passHref>
+            <Button type="button" variant="outline">
+              Cancel
+            </Button>
+          </Link>
           <Button type="submit" disabled={isSubmitting || !isValid || !isDirty}>
             {isSubmitting ? "Saving..." : "Save Changes"}
           </Button>

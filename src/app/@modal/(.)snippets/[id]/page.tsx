@@ -11,7 +11,7 @@ type SnippetShowModelProps = {
 const SnippetShowModel = async ({ params }: SnippetShowModelProps) => {
   const snippet = await getSnippet(params.id);
   return (
-    <Modal>
+    <Modal title={snippet?.title}>
       <SyntaxHighlight code={snippet?.code || ""} title={snippet?.title} />
     </Modal>
   );
