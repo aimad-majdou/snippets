@@ -25,9 +25,20 @@ const Home = async () => {
                 <CardTitle className="tw-text-sm tw-font-medium">
                   {snippet.title}
                 </CardTitle>
-                <Link href={`/snippets/${snippet.id}`} passHref>
-                  <Button size="sm">View</Button>
-                </Link>
+                <div className="tw-ml-auto tw-flex tw-gap-2">
+                  {/* Button to open modal */}
+                  <Link href={`/snippets/${snippet.id}`} passHref>
+                    <Button size="sm" variant="secondary">
+                      Preview (In modal)
+                    </Button>
+                  </Link>
+                  {/* Button to redirect to full page */}
+                  <Link href={`/${snippet.id}`} passHref>
+                    <Button size="sm" variant="success">
+                      View
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </CardHeader>
           </Card>
