@@ -1,11 +1,11 @@
-import deleteSnippetAction from "@/actions/deleteSnippet";
-import { CodeViewer } from "@/components/code-editor/code-viewer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getSnippet } from "@/data/snippet-dto";
-import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import deleteSnippetAction from '@/actions/deleteSnippet';
+import { CodeViewer } from '@/components/code-editor/code-viewer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { getSnippet, getSnippetList } from '@/data/snippet-dto';
+import { ArrowLeft, Pencil, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 type SnippetShowPageProps = {
   params: {
@@ -24,31 +24,31 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
   const handleDeleteSnippet = deleteSnippetAction.bind(null, snippet.id);
 
   return (
-    <div className="tw-container tw-mx-auto tw-py-8">
-      <div className="tw-mb-4">
-        <Link href="/" passHref>
-          <Button variant="ghost">
-            <ArrowLeft className="tw-w-4 tw-h-4 tw-mr-2" />
+    <div className='tw-container tw-mx-auto tw-py-8'>
+      <div className='tw-mb-4'>
+        <Link href='/' passHref>
+          <Button variant='ghost'>
+            <ArrowLeft className='tw-w-4 tw-h-4 tw-mr-2' />
             Go Back
           </Button>
         </Link>
       </div>
-      <Card className="tw-w-full tw-max-w-4xl tw-mx-auto">
+      <Card className='tw-w-full tw-max-w-4xl tw-mx-auto'>
         <CardHeader>
-          <div className="tw-flex tw-items-center tw-justify-between">
-            <CardTitle className="tw-text-2xl tw-font-bold">
+          <div className='tw-flex tw-items-center tw-justify-between'>
+            <CardTitle className='tw-text-2xl tw-font-bold'>
               {snippet.title}
             </CardTitle>
-            <div className="tw-flex tw-gap-2">
+            <div className='tw-flex tw-gap-2'>
               <Link href={`/${snippet.id}/edit`} passHref>
-                <Button variant="success" size="sm">
-                  <Pencil className="tw-w-4 tw-h-4 tw-mr-2" />
+                <Button variant='success' size='sm'>
+                  <Pencil className='tw-w-4 tw-h-4 tw-mr-2' />
                   Edit
                 </Button>
               </Link>
               <form action={handleDeleteSnippet}>
-                <Button variant="destructive" size="sm">
-                  <Trash2 className="tw-w-4 tw-h-4 tw-mr-2" />
+                <Button variant='destructive' size='sm'>
+                  <Trash2 className='tw-w-4 tw-h-4 tw-mr-2' />
                   Delete
                 </Button>
               </form>
@@ -64,3 +64,14 @@ const SnippetShowPage = async ({ params }: SnippetShowPageProps) => {
 };
 
 export default SnippetShowPage;
+
+export async function generateStaticParams() {
+  // Example of caching dynamic routes, this will make /[id] routes to be SSG: https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+  // The generateStaticParams function can be used in combination with dynamic route segments to statically generate pages at build time instead of on-demand at request time.
+  const snippets = await getSnippetList();
+  return snippets.map((snippet) => ({
+    params: {
+      id: snippet.id,
+    },
+  }));
+}

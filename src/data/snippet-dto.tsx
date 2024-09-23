@@ -1,11 +1,15 @@
-import { db } from "@/db";
+import { db } from '@/db';
 import {
   SnippetCreateSchemaType,
   SnippetUpdateSchemaType,
-} from "@/schemas/snippet";
-import "server-only";
+} from '@/schemas/snippet';
+import 'server-only';
 
 export async function getSnippet(id: string) {
+  // timeout of 2s to simulate network latency
+  const timeout = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await timeout(2000);
   // Fetch snippet from the database
   return db.snippet.findFirst({
     where: { id },
@@ -14,7 +18,11 @@ export async function getSnippet(id: string) {
 
 export async function getSnippetList() {
   // Fetch all snippets from the database
-  return db.snippet.findMany();
+  return db.snippet.findMany({
+    orderBy: {
+      createdAt: 'asc',
+    },
+  });
 }
 
 export async function createSnippet(data: SnippetCreateSchemaType) {

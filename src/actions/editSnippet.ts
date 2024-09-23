@@ -1,10 +1,10 @@
-"use server";
+'use server';
 
-import { updateSnippet } from "@/data/snippet-dto";
-import { SnippetUpdateSchemaType } from "@/schemas/snippet";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { buildErrorMessage } from "./helpers";
+import { updateSnippet } from '@/data/snippet-dto';
+import { SnippetUpdateSchemaType } from '@/schemas/snippet';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { buildErrorMessage } from './helpers';
 
 /**
  * editSnippetAction
@@ -35,7 +35,7 @@ const editSnippetAction = async (
     return {
       error: buildErrorMessage(
         error,
-        "An error occurred while updating the snippet."
+        'An error occurred while updating the snippet.'
       ),
     };
   }
@@ -44,6 +44,9 @@ const editSnippetAction = async (
   if (data.title !== originalSnippet.title) {
     revalidatePath(`/`);
   }
+
+  // Revalidate the snippet detail page since we told nextjs to cache those pages, so when we update the snippet, we need to revalidate the cache
+  revalidatePath(`/${data.id}`);
 
   redirect(`/${data.id}`); // Redirect on success
 };
