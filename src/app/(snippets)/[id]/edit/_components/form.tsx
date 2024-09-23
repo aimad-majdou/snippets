@@ -67,7 +67,7 @@ export default function SnippetEditForm({ snippet }: SnippetEditFormProps) {
 
   const handleFormSubmit = handleSubmit((data) => {
     startTransition(async () => {
-      const response = await editSnippetAction(data); // Perform the update
+      const response = await editSnippetAction(data, snippet); // Perform the update
 
       if (response?.error) {
         // Show error toast if snippet update fails
